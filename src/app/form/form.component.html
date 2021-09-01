@@ -1,1 +1,33 @@
-<p>form works!</p>
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <mat-form-field>
+    <mat-label>Imię</mat-label>
+    <input formControlName="name" type="text" matInput />
+    <mat-error *ngIf="form.get('name')?.hasError('required')"
+      >To pole jest wymagane</mat-error
+    >
+    <mat-error *ngIf="form.get('name')?.hasError('minlength')"
+      >To pole musi zawierać minimum parę znaków</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Nazwisko</mat-label>
+    <input formControlName="surname" type="text" matInput />
+    <mat-error *ngIf="form.get('surname')?.hasError('required')"
+      >To pole jest wymagane</mat-error
+    >
+    <mat-error *ngIf="form.get('surname')?.hasError('maxlength')"
+      >Nie za długie chochliku?</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Hasło</mat-label>
+    <input formControlName="password" type="password" matInput />
+    <mat-error *ngIf="form.get('password')?.hasError('required')"
+      >To pole jest wymagane</mat-error
+    >
+    <mat-error *ngIf="form.get('password')?.hasError('pattern')"
+      >Wprowadź fajniejsze hasło</mat-error
+    >
+  </mat-form-field>
+  <button color="primary" mat-raised-button>Zapisz sobie hasło wiesz</button>
+</form>
