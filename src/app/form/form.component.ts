@@ -29,16 +29,16 @@ export class FormComponent {
   public handleSubmit(): void {
     if (!this.form.valid) {
       this.snackBar.open(
-        'Upewnij się, że formularz jest poprawnie wyświetlany',
-        'Zamknij',
+        'Make sure form is completed without errors',
+        'Close',
         { duration: 3000 }
       );
       return;
     }
     this.formService.saveForm(this.form.value).subscribe((savedSuccesfully) => {
       this.snackBar.open(
-        savedSuccesfully ? 'Zapisano poprawnie' : 'Czemu masz na imię Tomek?',
-        'Zamknij',
+        savedSuccesfully ? 'Saved succesfully' : 'Why your name is Tomek?',
+        'Close',
         { duration: 3000 }
       );
     });
