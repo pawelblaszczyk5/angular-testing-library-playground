@@ -18,21 +18,6 @@ const server = setupServer(
   })
 );
 
-beforeAll(() => {
-  server.listen({
-    onUnhandledRequest: 'error',
-  });
-});
-
-afterAll(() => {
-  server.close();
-});
-
-beforeEach(() => {
-  server.events.removeAllListeners();
-  server.resetHandlers();
-});
-
 const setup = async () => {
   await render(FormComponent, {
     imports: [FormModule],
@@ -48,6 +33,25 @@ const setup = async () => {
 };
 
 describe('FormComponents tests', () => {
+  beforeAll(() => {
+    server.listen({
+      onUnhandledRequest: 'error',
+    });
+  });
+
+  afterAll(() => {
+    server.close();
+  });
+
+  beforeEach(() => {
+    server.events.removeAllListeners();
+    server.resetHandlers();
+  });
+
+  test('smoke test', async () => {
+    expect(await setup()).not.toBeUndefined();
+  });
+
   test('all fields should be required', async () => {
     const { nameInput, surnameInput, passwordInput } = await setup();
 
