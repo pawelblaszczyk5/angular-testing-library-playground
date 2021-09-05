@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FormService } from './services/form.service';
+import { FormService } from '../../services/form.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -35,12 +35,21 @@ export class FormComponent {
       );
       return;
     }
-    this.formService.saveForm(this.form.value).subscribe((savedSuccesfully) => {
-      this.snackBar.open(
-        savedSuccesfully ? 'Saved succesfully' : 'Why your name is Tomek?',
-        'Close',
-        { duration: 3000 }
-      );
-    });
+    this.formService.saveForm(this.form.value).subscribe(
+      (savedSuccesfully) => {
+        this.snackBar.open(
+          savedSuccesfully
+            ? 'Saved succesfully'
+            : 'Something is wrong with your form',
+          'Close',
+          { duration: 3000 }
+        );
+      },
+      () => {
+        this.snackBar.open('Error while saving the form', 'Close', {
+          duration: 3000,
+        });
+      }
+    );
   }
 }

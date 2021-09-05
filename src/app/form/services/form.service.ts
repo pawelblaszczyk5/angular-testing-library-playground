@@ -1,13 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class FormService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   public saveForm(form: Record<string, unknown>): Observable<boolean> {
-    return of(form.name !== 'Tomek');
+    return this.http.post<boolean>('/api/form', form);
   }
 }
