@@ -12,7 +12,7 @@ describe('FormComponent bad tests', () => {
   let fixture: ComponentFixture<FormComponent>;
 
   beforeEach(async () => {
-    TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       declarations: [FormComponent],
       imports: [ReactiveFormsModule, MockModule(MatInputModule)],
       providers: [
